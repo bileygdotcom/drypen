@@ -299,9 +299,9 @@ def draw_menu(stdscr):
                         stdscr.attron(curses.color_pair(20+PColor))
                         if PColor > 7:
                             stdscr.attron(curses.A_BOLD)
-                        XX = (center_x - (len(PixelString)-4)//2)
-                        YY = (center_y - 11)
-                        stdscr.addstr(j-1+YY, i-3+XX, B)
+                        XX = (center_x - (len(PixelString)-4)//2-3)
+                        YY = (center_y - 13)
+                        stdscr.addstr(j+YY, i+XX, B)
                         #stdscr.addstr(start_y+j-11, start_x_logo+i, 'B')
                         if PColor > 7:
                             stdscr.attroff(curses.A_BOLD)
@@ -333,9 +333,12 @@ def draw_menu(stdscr):
         ################################################################
         
         topperstr1 = whstr
-        topperstr1 = ' \U00002297' + '  DRYDOCK v.0.02 '
-        topperstr2 = ' \U00002297' + '  terminal launcher by bileyg'
+        #topperstr1 = ' \U00002297' + '  DRYDOCK v.0.02 '
+        #topperstr2 = ' \U00002297' + '  terminal launcher by bileyg'
         topperstr3 = " "
+        
+        topperstr1 = "Last key pressed: {}".format(k)[:width-1]
+        topperstr2 = "Pos: {}, {}".format(cursor_x, cursor_y)
         
         # Render topper1
         stdscr.attron(curses.color_pair(7))
@@ -531,7 +534,7 @@ def draw_menu(stdscr):
         F_Done[7][1] = False
         
         #cursor move works if right before the refresh()
-        #stdscr.move(cursor_y, cursor_x)
+        stdscr.move(cursor_y, cursor_x)
         
         # Refresh the screen
         stdscr.refresh()
